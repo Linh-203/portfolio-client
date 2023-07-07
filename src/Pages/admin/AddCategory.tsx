@@ -48,7 +48,7 @@ const AddCategory = (props) => {
         </Form.Item>
 
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" danger htmlType="submit">
             Submit
           </Button>
         </Form.Item>

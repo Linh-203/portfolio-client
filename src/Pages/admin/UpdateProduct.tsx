@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Form, Image, Input, Select, Upload, UploadFile } from 'antd';
 import { RcFile, UploadProps } from 'antd/es/upload';
-import { IProduct } from '../../types/products';
 import { PlusOutlined } from '@ant-design/icons';
 import { getAllCate } from '../../api/category';
-interface IProps {
-  products: IProduct[];
-  onUpdate: (id, product: IProduct) => void;
-}
-const UpdateProductPage = (props: IProps) => {
+const UpdateProductPage = (props) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -25,24 +20,17 @@ const UpdateProductPage = (props: IProps) => {
   }, []);
   const { id } = useParams();
 
-  const [product, setProduct] = useState<IProduct>(); // khởi tạo biến state product có kiểu dữ liệu là IProduct
+  const [product, setProduct] = useState();
   useEffect(() => {
-    // khi props thay đổi thì sẽ chạy useEffect này
-    const currentProduct = props.products.find(
-      (product: IProduct) => product._id == id
-    );
-    // tìm trong mảng props.products có phần tử nào có id trùng với id trên url không
-    setProduct(currentProduct); // nếu có thì set lại giá trị cho biến product
+    const currentProduct = props.products.find((product) => product._id == id);
+    setProduct(currentProduct);
   }, [props]);
   useEffect(() => {
-    // khi biến product thay đổi thì sẽ chạy useEffect này
-    setFields(); // gọi hàm setFields để set lại giá trị cho các input
+    setFields();
   }, [product]);
   console.log(product);
 
   const [form] = Form.useForm();
-  // khởi tạo một instance của Form và gán vào biến form
-  // Instance của form là một đối tượng được tạo ra bởi Ant Design để thực hiện các chức năng của form trong React
   const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -66,13 +54,13 @@ const UpdateProductPage = (props: IProps) => {
     setFileList(newFileList);
 
   const setFields = () => {
-    // hàm này để set lại giá trị cho các input
     form.setFieldsValue({
-      // gọi hàm setFieldsValue của instance form để set lại giá trị cho các input dựa vào giá trị của biến product
       id: product?._id,
       name: product?.name,
-      price: product?.price,
+      year: product?.year,
       desc: product?.desc,
+      demo_link: product?.demo_link,
+      source_code_link: product?.source_code_link,
       categoryId: product?.categoryId._id,
     });
   };
@@ -82,7 +70,9 @@ const UpdateProductPage = (props: IProps) => {
     const prdUpdate = {
       id: values.id,
       name: values.name,
-      price: values.price,
+      year: values.year,
+      demo_link: values.demo_link,
+      source_code_link: values.source_code_link,
       desc: values.desc,
       image:
         values.image === undefined
@@ -124,16 +114,15 @@ const UpdateProductPage = (props: IProps) => {
         </Form.Item>
 
         <Form.Item
-          label="Product Price"
-          name="price"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          label="Product Year"
+          name="year"
+          rules={[{ required: true, message: 'Please input your year!' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item label="Product Image" name="image">
           <Upload
-            // action="http://localhost:3000/products"
             listType="picture-card"
             fileList={fileList}
             onPreview={handlePreview}
@@ -141,9 +130,6 @@ const UpdateProductPage = (props: IProps) => {
           >
             {fileList.length >= 1 ? null : uploadButton}
           </Upload>
-          {/* <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                    </Modal> */}
         </Form.Item>
         <Form.Item label="Current Image" name="currentImage">
           <Image src={product?.image} />
@@ -155,7 +141,31 @@ const UpdateProductPage = (props: IProps) => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Demo link"
+          name="demo_link"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your demo_link!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
+        <Form.Item
+          label="Source code link"
+          name="source_code_link"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your source_code_link!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="CategoryId"
           name="categoryId"

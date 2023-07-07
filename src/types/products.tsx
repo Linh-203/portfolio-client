@@ -1,7 +1,9 @@
 export interface IProduct {
-  id: number;
+  _id: string;
   name: string;
   image: string;
-  price: number;
+  year: string;
+  demo_link: string;
+  source_code_link: string;
   desc: string;
 }

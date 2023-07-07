@@ -99,12 +99,12 @@ const AddProductPage = (props) => {
         </Form.Item>
 
         <Form.Item
-          label="Price"
-          name="price"
+          label="Year"
+          name="year"
           rules={[
             {
               required: true,
-              message: 'Please input your product price!',
+              message: 'Please input your product year!',
             },
           ]}
         >
@@ -138,6 +138,32 @@ const AddProductPage = (props) => {
             {
               required: true,
               message: 'Please input your product product desc!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Demo link"
+          name="demo_link"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your demo_link!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Source code link"
+          name="source_code_link"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your source_code_link!',
             },
           ]}
         >

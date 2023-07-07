@@ -122,6 +122,7 @@ const SectionWrapper = (Component, idName) =>
   };
 
 const ProjectCard = ({
+  _id,
   index,
   name,
   desc,
@@ -149,7 +150,7 @@ const ProjectCard = ({
           />
           <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
             <div
-              onClick={() => window.open(demo_link, '_blank')}
+              onClick={() => window.open(demo_link)}
               className="black-gradient w-8 h-8 rounded-full flex justify-center items-center cursor-pointer"
             >
               <img
@@ -172,8 +173,8 @@ const ProjectCard = ({
         <div className="mt-3 flex justify-center items-center">
           <a
             className="shadow-md shadow-primary m-3 p-2 bg-tertiary w-[60%] rounded-lg flex justify-center"
-            href={demo_link}
-            target="_blank"
+            href={'/' + _id}
+            target={''}
           >
             See the Demo
           </a>
@@ -185,7 +186,6 @@ const ProjectCard = ({
 
 const Works = ({ products = [] }) => {
   console.log(products);
-  // console.log(products);
   return (
     <>
       <div className="w-full flex">

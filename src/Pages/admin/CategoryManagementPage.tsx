@@ -2,18 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Space, Table, Image, Button, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import type { ColumnsType } from 'antd/es/table';
-// import { IProduct } from '../../types/products';
-
-// interface IPrors {
-//   products: IProduct[];
-//   deletePro: (id: number) => void;
-// }
 
 const CategoryManagementPage = (prors) => {
-  const history = useNavigate();
   const [data, setData] = useState();
   const [searchValue, setSearchValue] = useState<string>('');
-  // const navigate = useNavigate();
   useEffect(() => {
     setData(
       prors.category.map((cate) => {
@@ -30,13 +22,6 @@ const CategoryManagementPage = (prors) => {
     });
     setData(filterSearch);
   };
-  const onHandleLogout = () => {
-    const confirm = window.confirm('Ban có chắc muốn đăng xuất không !');
-    if (confirm) {
-      localStorage.removeItem('token');
-      history('/login'); // Chuyển hướng đến trang đăng nhập sau khi đăng xuất
-    }
-  };
   const deleteCate = (id) => {
     const confirm = window.confirm('Ban co chac khong !');
     if (id === '6434cfc908cf7e049e51739d') {
@@ -47,8 +32,6 @@ const CategoryManagementPage = (prors) => {
       }
     }
   };
-  // console.log(prors.products);
-  // console.log(data.name);
 
   interface DataType {
     key: string;
@@ -75,7 +58,7 @@ const CategoryManagementPage = (prors) => {
           <Button type="primary" danger onClick={() => deleteCate(record._id)}>
             Delete
           </Button>
-          <Button type="primary">
+          <Button type="primary" danger>
             <Link
               className="link-no-underline"
               to={'/admin/category/' + record._id + '/update'}
@@ -90,9 +73,6 @@ const CategoryManagementPage = (prors) => {
 
   return (
     <div>
-      <Button onClick={onHandleLogout} type="primary" danger>
-        Logout
-      </Button>
       <Input.Search
         allowClear
         enterButton="Search"
@@ -102,7 +82,7 @@ const CategoryManagementPage = (prors) => {
         onChange={handleSearch}
         style={{ margin: '20px 0' }}
       />
-      <Button type="primary">
+      <Button type="primary" danger>
         <Link className="link-no-underline" to={'/admin/category/add'}>
           Add Category
         </Link>

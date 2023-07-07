@@ -2,13 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Space, Table, Image, Button, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import type { ColumnsType } from 'antd/es/table';
-// import { IProduct } from '../../types/products';
-
-// interface IPrors {
-//   products: IProduct[];
-//   deletePro: (id: number) => void;
-// }
-
 const ProductManagementPage = (prors) => {
   const history = useNavigate();
   const [data, setData] = useState();
@@ -20,7 +13,6 @@ const ProductManagementPage = (prors) => {
       })
     );
   }, [prors]);
-  console.log(prors.products.message);
   const handleSearch = (e: any) => {
     setSearchValue(e.target.value);
     const filterSearch = prors.products.filter((item) => {
@@ -44,7 +36,7 @@ const ProductManagementPage = (prors) => {
 
   interface DataType {
     key: string;
-    id: number;
+    _id: number;
     name: string;
     image: string;
     price: number;
@@ -66,9 +58,9 @@ const ProductManagementPage = (prors) => {
       render: (image) => <Image width={200} src={image} />,
     },
     {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
+      title: 'Year',
+      dataIndex: 'year',
+      key: 'year',
     },
     {
       title: 'Desc',
@@ -86,6 +78,12 @@ const ProductManagementPage = (prors) => {
       ),
     },
     {
+      title: 'Demo link',
+      dataIndex: 'demo_link',
+      key: 'demo_link',
+      render: (text) => <a>{text}</a>,
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
@@ -98,7 +96,7 @@ const ProductManagementPage = (prors) => {
           >
             Delete
           </Button>
-          <Button type="primary">
+          <Button type="primary" danger>
             <Link
               className="link-no-underline"
               to={'/admin/products/' + record._id + '/update'}
@@ -106,8 +104,8 @@ const ProductManagementPage = (prors) => {
               Update
             </Link>
           </Button>
-          <Button type="primary">
-            <Link className="link-no-underline" to={'/products/' + record._id}>
+          <Button type="primary" danger>
+            <Link className="link-no-underline" to={'/' + record._id}>
               Detail
             </Link>
           </Button>
@@ -118,9 +116,6 @@ const ProductManagementPage = (prors) => {
 
   return (
     <div>
-      <Button onClick={onHandleLogout} type="primary" danger>
-        Logout
-      </Button>
       <Input.Search
         allowClear
         enterButton="Search"
@@ -130,7 +125,7 @@ const ProductManagementPage = (prors) => {
         onChange={handleSearch}
         style={{ margin: '20px 0' }}
       />
-      <Button type="primary">
+      <Button type="primary" danger>
         <Link className="link-no-underline" to={'/admin/products/add'}>
           Add Product
         </Link>

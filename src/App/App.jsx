@@ -7,27 +7,23 @@ import {
   getAllProduct,
   updateProduct,
 } from '../api/product';
-import ProductManagementPage from '../Pages/admin/ProductManagement';
-import AddProductPage from '../Pages/admin/AddProduct';
-import UpdateProductPage from '../Pages/admin/UpdateProduct';
-import axios from 'axios';
 import {
   createCategory,
   deleteCate,
   getAllCate,
   updateCate,
 } from '../api/category';
+import ProductManagementPage from '../Pages/admin/ProductManagement';
+import AddProductPage from '../Pages/admin/AddProduct';
+import UpdateProductPage from '../Pages/admin/UpdateProduct';
 import CategoryManagementPage from '../Pages/admin/CategoryManagementPage';
 import AddCategory from '../Pages/admin/AddCategory';
 import UpdateCategoryPage from '../Pages/admin/UpdateCategory';
-import NavBar from '../Components/nav/NavBar';
-
-import Hero from '../Pages/Hero';
-import Projects from '../Pages/Projects';
-import About from '../Pages/About';
-import Skills from '../Pages/Skills';
-import Contact from '../Pages/Contact';
-
+import WebsiteLayout from '../Pages/layouts/WebsiteLayout';
+import HomePage from '../Pages/HomePage';
+import AdminLayout from '../Pages/layouts/AdminLayout';
+import Dashboard from '../Pages/admin/Dashboard';
+import Detail from '../Pages/Detail';
 function App() {
   const [products, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
@@ -112,19 +108,26 @@ function App() {
         alert(response.data.message);
       });
   };
+  console.log(products);
   return (
     <div className="App">
-      <>
+      {/* <>
         <NavBar />
         <Hero />
         <About />
         <Projects products={products} />
         <Skills />
         <Contact />
-      </>
+      </> */}
       <Routes>
+        {/* -------------------------------------WEBSITE-------------------------------------------- */}
+        <Route path="/" element={<WebsiteLayout />}>
+          <Route index element={<HomePage products={products} />} />
+          <Route path=":id" element={<Detail />} />
+        </Route>
+        <Route path="" element></Route>
         {/* -------------------------------------ADMIN-------------------------------------------- */}
-        {/* <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
 
           <Route path="products">
@@ -175,7 +178,7 @@ function App() {
               }
             />
           </Route>
-        </Route> */}
+        </Route>
       </Routes>
     </div>
   );
