@@ -105,7 +105,7 @@ const ProductManagementPage = (prors) => {
             </Link>
           </Button>
           <Button type="primary" danger>
-            <Link className="link-no-underline" to={'/' + record._id}>
+            <Link className="link-no-underline" to={'/products/' + record._id}>
               Detail
             </Link>
           </Button>

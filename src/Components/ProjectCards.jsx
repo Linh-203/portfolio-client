@@ -173,7 +173,7 @@ const ProjectCard = ({
         <div className="mt-3 flex justify-center items-center">
           <a
             className="shadow-md shadow-primary m-3 p-2 bg-tertiary w-[60%] rounded-lg flex justify-center"
-            href={'/' + _id}
+            href={'/products/' + _id}
             target={''}
           >
             See the Demo

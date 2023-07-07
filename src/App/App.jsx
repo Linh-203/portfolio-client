@@ -123,7 +123,7 @@ function App() {
         {/* -------------------------------------WEBSITE-------------------------------------------- */}
         <Route path="/" element={<WebsiteLayout />}>
           <Route index element={<HomePage products={products} />} />
-          <Route path=":id" element={<Detail />} />
+          <Route path="products/:id" element={<Detail />} />
         </Route>
         <Route path="" element></Route>
         {/* -------------------------------------ADMIN-------------------------------------------- */}
