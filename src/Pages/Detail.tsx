@@ -8,7 +8,7 @@ const Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    fetch('http://localhost:8080/api/products/' + id)
+    fetch('https://portfolio-service-iuee.onrender.com/api/products/' + id)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, []);
