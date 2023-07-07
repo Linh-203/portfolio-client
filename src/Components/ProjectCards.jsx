@@ -12,7 +12,7 @@ import { styles } from '../styles';
 import { projects } from '../Constants/constants';
 import { Tilt } from 'react-tilt';
 import { githubIcon } from '../assets';
-
+import { Link } from 'react-router-dom';
 export const staggerContainer = (staggerChildren, delayChildren) => {
   return {
     hidden: {},
@@ -171,13 +171,12 @@ const ProjectCard = ({
         </div>
         <div className="mt-2 flex flex-wrap gap-1"></div>
         <div className="mt-3 flex justify-center items-center">
-          <a
+          <Link
             className="shadow-md shadow-primary m-3 p-2 bg-tertiary w-[60%] rounded-lg flex justify-center"
-            href={'/products/' + _id}
-            target={''}
+            to={'/products/' + _id}
           >
             See the Demo
-          </a>
+          </Link>
         </div>
       </Tilt>
     </motion.div>
